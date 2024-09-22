@@ -47,7 +47,7 @@ const PORT = process.env.PORT;
 
 const server = app.listen(
   PORT,
-  console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+  console.log(`Server running on PORT ${PORT}...${process.env.MONGO_URI}`.yellow.bold)
 );
 
 const io = require("socket.io")(server, {
@@ -62,7 +62,6 @@ io.on("connection", (socket) => {
   console.log("Connected to socket.io");
   socket.on("setup", (userData) => {
     socket.join(userData._id);
-    console.log("Userdata._id ",userData._id)
     socket.emit("connected");
   });
 
